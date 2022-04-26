@@ -1,0 +1,13 @@
+name: Pull Requests
+
+on:
+  pull_request: {}
+
+jobs:
+  verification:
+    uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
+    with:
+      tag: ${{ github.sha }}
+      push: false
+
+
