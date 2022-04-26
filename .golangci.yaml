@@ -1,0 +1,30 @@
+
+#this is the config file for golangci-lint
+#golangci-lint will automatically detect this file
+#available configurations can be found here https://golangci-lint.run/usage/configuration/
+
+linters:
+  enable:
+    - dupl
+    - goconst
+    - gocritic
+    - gofmt
+    - goimports
+    - govet
+    - golint
+    - goprintffuncname
+    - misspell
+    - nakedret
+    - prealloc
+    - stylecheck
+    - unconvert
+    - unparam
+    - whitespace
+    - gosec
+
+issues:
+  exclude-rules:
+    - linters:
+        - gosec
+      path: asset/policy/model.go
+      text: "G101: Potential hardcoded credentials" # False positive when defining api constant
