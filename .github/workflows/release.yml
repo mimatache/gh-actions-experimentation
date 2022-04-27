@@ -1,9 +1,7 @@
 name: Release
 
 on:
-  create:
-    tags:
-      - v*.*.*
+  release: {}
 
 jobs:
   test:
@@ -19,7 +17,6 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo ${{ steps.vars.outputs.tag }}
-  # verification:
-  #   uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
-  #   with:
-  #     tag: ${GITHUB_REF#refs/*/}
+      - uses: ./.github/actions/verification
+        with:
+          tag: ${{ steps.vars.outputs.tag }}

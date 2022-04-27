@@ -5,8 +5,10 @@ on:
 
 jobs:
   verification:
-    uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
-    with:
-      tag: ${{ github.sha }}
-
-
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/verification
+      with:
+        tag: ${{ github.sha }}
+        

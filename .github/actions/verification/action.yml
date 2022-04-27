@@ -1,0 +1,37 @@
+name: Verification
+description: Run verification action
+
+
+inputs:
+  tag:
+    required: true
+    description: Tag og the docker image
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.18'
+    - run: go version
+      shell: bash
+    # Lint 
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+        version: v1.45.2
+    - name: Unit Tests
+      shell: bash
+      run:  go test -v --short --race -json -coverprofile=coverage.out ./... > unit-test.json
+    - name: Annotate tests
+      if: always()
+      uses: guyarb/golang-test-annoations@v0.5.1
+      with:
+        test-results: unit-test.json
+    - name: 'Build image'
+      shell: bash
+      run: |
+        docker build . -t testing:${{ inputs.tag }}
+
