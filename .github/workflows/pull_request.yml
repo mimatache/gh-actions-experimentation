@@ -8,6 +8,5 @@ jobs:
     uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
     with:
       tag: ${{ github.sha }}
-      push: false
 
 

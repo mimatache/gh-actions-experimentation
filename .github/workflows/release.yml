@@ -1,7 +1,7 @@
 name: Release
 
 on:
-  push:
+  create:
     tags:
       - v*.*.*
 
@@ -23,4 +23,3 @@ jobs:
     uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
     with:
       tag: ${GITHUB_REF#refs/*/}
-      push: true

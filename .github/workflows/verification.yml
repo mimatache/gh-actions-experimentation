@@ -6,17 +6,12 @@ on:
       tag:
         required: true
         type: string
-      push:
-        required: true
-        type: boolean
   workflow_dispatch:
     inputs:
       tag:
         required: true
+        description: Tag og the docker image
         type: string
-      push:
-        required: true
-        type: boolean
 
 jobs:
   # Runs the linter
@@ -45,5 +40,4 @@ jobs:
       - name: 'Build image'
         run: |
           docker build . -t testing:${{ inputs.tag }}
-          ${{ inputs.push }} && echo "Pushing"
 
