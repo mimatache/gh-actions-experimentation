@@ -19,7 +19,7 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo ${{ steps.vars.outputs.tag }}
-  verification:
-    uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
-    with:
-      tag: ${GITHUB_REF#refs/*/}
+  # verification:
+  #   uses: mimatache/gh-actions-experimentation/.github/workflows/verification.yml@main
+  #   with:
+  #     tag: ${GITHUB_REF#refs/*/}
