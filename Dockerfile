@@ -12,16 +12,15 @@ RUN git config --global --add url."git@github.com:".insteadOf "https://github.co
 
 WORKDIR /workspace
 COPY go.mod go.mod
-COPY go.sum go.sum
 
-RUN --mount=type=ssh  go mod download
+RUN go mod download
 
 COPY main.go main.go
 
 # ./... excludes the vendor directory implicitly
-RUN --mount=type=ssh go test -short ./...
+RUN go test -short ./...
 
-RUN --mount=type=ssh go build -ldflags="-s -w" -o app
+RUN go build -ldflags="-s -w" -o app
 
 # lite image, from build
 FROM alpine:3

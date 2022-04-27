@@ -9,11 +9,15 @@ on:
 jobs:
   version:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+      - name: verification
+        uses: ./.github/actions/verification
+        with:
+          tag: ${{ github.sha }}
       - uses: go-semantic-release/action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           allow-initial-development-versions: true
           force-bump-patch-version: true
+          dry: false
