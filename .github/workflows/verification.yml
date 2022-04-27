@@ -35,7 +35,7 @@ jobs:
         with:
           test-results: unit-test.json
       - name: 'Build image'
-      - run: |
+        run: |
           docker build . -t testing:${{ inputs.tag }}
           ${{ inputs.push }} && echo "Pushing"
 
