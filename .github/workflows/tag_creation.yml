@@ -21,6 +21,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           allow-initial-development-versions: true
           force-bump-patch-version: true
-      - uses: ./.github/actions/verification
-        with:
-          tag: ${{ steps.semrel.outputs.version }}
+      - name: check docker
+        run: |
+          docker images
+      - name: check sha
+        run: |
+          echo "${{ github.sha }}"
