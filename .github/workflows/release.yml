@@ -1,7 +1,9 @@
 name: Release
 
 on:
-  release: {}
+  create:
+    tags:
+      - v*.*.*
 
 jobs:
   test:
